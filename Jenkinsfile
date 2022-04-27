@@ -4,28 +4,34 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 sh "echo staring build the image"
-                sh 'docker build -t fattehali/nodejsapp-1.0:latest .'
+                script {
+                    sh 'docker build -t fattehali/nodejs:latest .'
+                }
             }
         }
         stage('Deploy Docker Image') {
             steps {
                 sh "echo staring deploy the image"
-                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                sh 'docker push fattehali/nodejsapp-1.0:latest'
-            }
-        }
-        stage('Remove Docker Image') {
-            steps {
-                sh "docker rmi -f fattehali/nodejsapp-1.0"    
+                script {
+                     sh 'docker login -u fattehali -p Asad@123'
+                 }  
+               sh 'docker push fattehali/nodejs:latest'
             }
         }
         stage('Deploy to Kubernetes') {
             steps {
+                sshagent(['k8s']) {
+    
+
                 
-                    sh "echo staring deploy the image in Kubernetes"
-                    
-                    sh " kubectl apply -f nodejsapp.yaml" 
-                
+                    sh "echo staring deploy the image"
+                    sh "pwd"
+                    // sh "ssh ubuntu@15.206.84.255 docker rmi -f fattehali/nodejs"
+                    // sh "scp -o StrictHostKeyChecking=no nodejsapp.yaml ubuntu@15.206.84.255:/home/ubuntu/"
+                    // script {
+                    //           sh "ssh ubuntu@15.206.84.255 kubectl apply -f nodejsapp.yaml" 
+                    //  }
+                }
             }
         }
     
