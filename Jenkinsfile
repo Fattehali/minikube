@@ -13,7 +13,7 @@ pipeline{
             steps {
                 sh "echo staring deploy the image"
                 script {
-                     sh 'docker login -u fattehali -p Asad@123'
+                     sh 'docker login -u fattehali -p Asad@1234'
                  }  
                sh 'docker push fattehali/nodejs:latest'
             }
