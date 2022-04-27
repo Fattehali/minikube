@@ -22,10 +22,10 @@ pipeline{
             steps {
                 sshagent(['k8s']) {
                     sh "echo staring deploy the image"
-                    sh "ssh ubuntu@$DEPLOY_IP docker rmi -f fattehali/nodejs"
-//                     sh "scp -o StrictHostKeyChecking=no nodejsapp.yaml ubuntu@$DEPLOY_IP:/home/ubuntu/"
+                    sh "ssh ubuntu@172.31.15.210 docker rmi -f fattehali/nodejs"
+                    sh "scp -o StrictHostKeyChecking=no nodejsapp.yaml ubuntu@172.31.15.210:/home/ubuntu/"
 //                      script {
-//                               sh "ssh ubuntu@$DEPLOY_IP kubectl apply -f nodejsapp.yaml" 
+//                               sh "ssh ubuntu@172.31.15.210 kubectl apply -f nodejsapp.yaml" 
 //                      }
                 }
             }
