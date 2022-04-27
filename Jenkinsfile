@@ -25,12 +25,10 @@ pipeline{
 
                 
                     sh "echo staring deploy the image"
-                    sh "pwd"
-                    // sh "ssh ubuntu@15.206.84.255 docker rmi -f fattehali/nodejs"
-                    // sh "scp -o StrictHostKeyChecking=no nodejsapp.yaml ubuntu@15.206.84.255:/home/ubuntu/"
-                    // script {
-                    //           sh "ssh ubuntu@15.206.84.255 kubectl apply -f nodejsapp.yaml" 
-                    //  }
+//                     sh "pwd"
+                    sh "docker rmi -f fattehali/nodejs"      
+                    sh "kubectl apply -f nodejsapp.yaml" 
+                    
                 }
             }
         }
